@@ -54,6 +54,10 @@ body{
   backdrop-filter: blur(6px);
   box-shadow: 0 8px 30px rgba(2,6,23,0.6);
 }
+body {
+  padding-top: 50px; /* Ajusta según la altura de .main-nav */
+}
+
 .nav-inner{ display:flex; align-items:center; justify-content:space-between; gap:1rem; }
 .brand{ display:flex; align-items:center; gap:.75rem; }
 .logo{ height:38px; width:38px; background:linear-gradient(180deg, rgba(52,211,153,0.12), rgba(16,185,129,0.08)); border-radius:10px; display:inline-grid; place-items:center; font-weight:700; color:var(--accent-start); box-shadow: 0 4px 14px rgba(16,185,129,0.06); }
@@ -103,3 +107,80 @@ body{
   .main-nav{ left:0; transform:none; width:100%; border-radius:0; padding:.45rem 1rem; }
   .mobile-menu{ display:none; } /* se controla por JS */
 }
+/* ===== Estilos del menú móvil: apariencia tipo tarjeta (no "link") ===== */
+.mobile-menu {
+  /* oculto por defecto: JS controla visibilidad con la clase .open */
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  z-index: 60;
+  transform-origin: top center;
+  transition: opacity .18s ease, transform .18s ease;
+  opacity: 0;
+  transform: translateY(-6px) scaleY(.98);
+}
+
+/* visible cuando JS añade .open */
+.mobile-menu.open {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
+/* fondo y contenedor interior */
+.mobile-menu .mobile-inner{
+  background: linear-gradient(180deg, rgba(6,33,22,0.94), rgba(6,33,22,0.88));
+  padding: .75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 12px 30px rgba(2,6,23,0.45);
+}
+
+/* lista vertical tipo "botones" limpios */
+.mobile-menu ul { list-style: none; margin: 0; padding: 0; display:flex; flex-direction:column; gap:.5rem; }
+
+.mobile-menu li { margin: 0; }
+
+/* Links con aspecto de tarjeta/button, sin aspecto "link" */
+.mobile-menu a {
+  display: block;
+  padding: .85rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;     /* quitar subrayado */
+  color: #e6f3ec;            /* texto claro */
+  background: rgba(255,255,255,0.02);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background .14s ease, transform .12s ease, box-shadow .12s ease;
+  box-shadow: none;
+}
+
+/* estados al pasar el ratón / tocar */
+.mobile-menu a:hover,
+.mobile-menu a:focus {
+  background: linear-gradient(90deg, rgba(52,211,153,0.06), rgba(16,185,129,0.03));
+  transform: translateY(-2px);
+  outline: none;
+  box-shadow: 0 8px 18px rgba(16,185,129,0.06);
+}
+
+/* indicador del link activo en móvil */
+.mobile-menu a.active {
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  color: #02210f;
+  transform: none;
+  box-shadow: 0 8px 20px rgba(16,185,129,0.12);
+}
+
+/* Hacer el botón toggle (X/☰) más claro y visible cuando el menú está abierto */
+.mobile-toggle[aria-expanded="true"] {
+  color: #e6f3ec;
+  transform: rotate(0deg);
+}
+
+/* Ajuste: asegurar paddings / separación en pantallas chicas */
+@media (max-width:900px){
+  .mobile-menu { top: calc(100% + 6px); left: 0; width: 100%; padding: 0 1rem; }
+} 
