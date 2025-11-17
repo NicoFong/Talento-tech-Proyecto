@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Energías renovables en Colombia — Landing</title>
+  <meta name="description" content="Información y acceso a energías renovables en Colombia. Proyectos, beneficios y cómo acceder." />
+  <!-- Vincula el CSS -->
+  <link rel="stylesheet" href="misestilos.css">
+</head>
+<body>
+  <!-- Navegación fija -->
+  <nav class="main-nav" aria-label="Menú principal">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">ER</div>
+        <div class="brand-text">
+          <div class="brand-title">Energías Renovables</div>
+          <div class="brand-sub">Colombia</div>
+        </div>
+      </div>
+
+      <div class="nav-links" id="navLinks">
+        <ul>
+          <li><a href="index.html" class="nav-link" data-target="Inicio">Inicio</a></li>
+          <li><a href="queSon.html" class="nav-link" data-target="queSon">¿Qué son?</a></li>
+          <li><a href="EnColombia.html" class="nav-link" data-target="EnColombia">En Colombia</a></li>
+          <li><a href="puedo.html" class="nav-link" data-target="puedo">¿Puedo acceder?</a></li>
+        </ul>
+      </div>
+
+      <!-- Toggle móvil -->
+      <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menú">☰</button>
+    </div>
+
+    <!-- Menú móvil -->
+    <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+      <div class="container mobile-inner">
+        <ul>
+          <li><a href="index.html" class="nav-link" data-target="Inicio">Inicio</a></li>
+          <li><a href="queSon.html" class="nav-link" data-target="queSon">¿Qué son?</a></li>
+          <li><a href="EnColombia.html" class="nav-link" data-target="EnColombia">En Colombia</a></li>
+          <li><a href="puedo.html" class="nav-link" data-target="puedo">¿Puedo acceder?</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero / Header -->
+  <header class="site-hero">
+    <div class="container hero-grid">
+      <div>
+        <h1 class="hero-heading">Energías renovables en Colombia<br/>
+          <small class="hero-sub">Transición, beneficios y cómo acceder a programas y proyectos</small>
+        </h1>
+
+        <p class="hero-lead">Conoce qué son las energías renovables, su estado actual en Colombia, las ventajas y los pasos para acceder a soluciones en tu institución o vivienda.</p>
+
+        <div class="hero-cta">
+          <a href="#EnColombia" class="btn">Estado en Colombia</a>
+          <a href="#puedo" class="btn-ghost">¿Puedo acceder?</a>
+        </div>
+
+        <div class="kpi" aria-hidden="true">
+          <div class="item">Ahorro estimado hasta 30%</div>
+          <div class="item">Reducción CO₂ ≈ 68 t/año</div>
+          <div class="item">Proyectos en colegios</div>
+        </div>
+      </div>
+
+      <aside class="card image-card" aria-label="imagen destacada">
+        <figure>
+          <img src="miimagen.jpg" alt="Paneles solares sobre techo institucional" />
+        </figure>
+        <p class="caption">Ilustración: instalación típica de paneles fotovoltaicos en un techo escolar.</p>
+      </aside>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <div class="spacer" aria-hidden="true"></div>
+
+    <!-- Inicio -->
+    <section id="Inicio" class="section" aria-labelledby="tituloInicio">
+      <h2 id="tituloInicio" class="section-title">Inicio</h2>
+      <div class="card">
+        <h3>Bienvenido</h3>
+        <p>Las energías renovables transforman la forma de producir y consumir energía. Aquí encontrarás la información esencial, casos de uso y pasos para acceder a soluciones en tu institución o vivienda.</p>
+
+        <div class="grid-3">
+          <div class="card small"> <h4>Fotovoltaica</h4> <p class="muted">Paneles solares para generación distribuida.</p> </div>
+          <div class="card small"> <h4>Eficiencia</h4> <p class="muted">Mejoras en la gestión de la demanda.</p> </div>
+          <div class="card small"> <h4>Financiamiento</h4> <p class="muted">Programas públicos y privados disponibles.</p> </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ¿Qué son? -->
+    <section id="queSon" class="section" aria-labelledby="tituloQueSon">
+      <h2 id="tituloQueSon" class="section-title">¿Qué son?</h2>
+      <div class="card">
+        <p>Fuentes cuya explotación no agota el recurso: solar, eólica, biomasa y pequeñas hidroeléctricas. Características: baja emisión de GEI y descentralización.</p>
+        <h4>Beneficios</h4>
+        <ul class="muted">
+          <li>Ahorro en factura eléctrica</li>
+          <li>Resiliencia en zonas rurales</li>
+          <li>Reducción de huella de carbono</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- En Colombia -->
+    <section id="EnColombia" class="section" aria-labelledby="tituloEnColombia">
+      <h2 id="tituloEnColombia" class="section-title">En Colombia</h2>
+      <div class="card grid-2">
+        <div>
+          <h3>Programas públicos</h3>
+          <p class="muted">Iniciativas gubernamentales y cooperación internacional para colegios y entidades públicas.</p>
+        </div>
+        <div>
+          <h3>Mercado privado</h3>
+          <p class="muted">Modelos: prestación de servicios, leasing y compra de energía.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ¿Puedo acceder? -->
+    <section id="puedo" class="section" aria-labelledby="tituloPuedo">
+      <h2 id="tituloPuedo" class="section-title">¿Puedo acceder?</h2>
+      <div class="card">
+        <h3>Requisitos comunes y pasos</h3>
+        <ol class="muted">
+          <li>Evaluación técnica del sitio (estructura, orientación, sombras).</li>
+          <li>Análisis de consumo y dimensionamiento.</li>
+          <li>Fuentes de financiamiento: programas, créditos o modelos con proveedores.</li>
+          <li>Aprobaciones y permisos si aplican.</li>
+        </ol>
+        <p class="muted">Puedo prepararte una checklist técnica a medida si quieres.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-left">
+        <h4>Energías Renovables — Colombia</h4>
+        <p class="muted">Información general, beneficios y guías para acceder a energías limpias.</p>
+      </div>
+      <div class="footer-links">
+        <p class="muted"><a href="#Inicio">Inicio</a></p>
+        <p class="muted"><a href="#queSon">¿Qué son?</a></p>
+        <p class="muted"><a href="#EnColombia">En Colombia</a></p>
+        <p class="muted"><a href="#puedo">¿Puedo acceder?</a></p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <small class="muted">Medellín, Colombia • © Derechos Reservados 2025</small>
+      <small class="muted">Diseño moderno · Navegación fija · Accesible</small>
+    </div>
+  </footer>
+
+  <!-- Vincula el JS -->
+  <script src="funciones.js"></script>
+</body>
+</html>
