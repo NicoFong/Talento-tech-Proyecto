@@ -239,7 +239,7 @@ body {
   flex-wrap:wrap;
 }
 .footer-left{ max-width:560px; }
-.footer-links p{ margin:0; }
+
 .footer-bottom{ 
   margin-top:1.1rem; 
   display:flex; 
@@ -259,7 +259,6 @@ body {
   .main-nav{ left:0; transform:none; width:100%; border-radius:0; padding:.45rem 1rem; }
   .mobile-menu{ display:none; } /* se controla por JS */
 }
-/* ===== Estilos del menú móvil: apariencia tipo tarjeta (no "link") ===== */
 .mobile-menu {
   /* oculto por defecto: JS controla visibilidad con la clase .open */
   display: none;
@@ -291,7 +290,14 @@ body {
 }
 
 /* lista vertical tipo "botones" limpios */
-.mobile-menu ul { list-style: none; margin: 0; padding: 0; display:flex; flex-direction:column; gap:.5rem; }
+.mobile-menu ul { 
+  list-style: 
+  none; margin: 0; 
+  padding: 0; 
+  display:flex; 
+  flex-direction:column; 
+  gap:.5rem; 
+}
 
 .mobile-menu li { margin: 0; }
 
