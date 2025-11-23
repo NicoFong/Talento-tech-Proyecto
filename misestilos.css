@@ -348,3 +348,24 @@ body {
     padding: 0 1rem; 
   }
 } 
+/* ==========================================
+   CORRECCIÓN: evitar que el hero y el main
+   deformen el tamaño del menú (main-nav)
+   ========================================== */
+header, nav, main, footer {
+  max-width: var(--maxWidth);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* ==========================================
+   CORRECCIÓN: evitar que hero-grid estire
+   el contenedor en pantallas medianas
+   ========================================== */
+@media (max-width: 1200px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
