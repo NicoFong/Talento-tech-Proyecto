@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficas de Energía</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        canvas {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gráficas de Energía por País</h1>
+
+    <!-- Canvas para cada país -->
+    <canvas id="graphAfrica"></canvas>
+    <canvas id="graphAsia"></canvas>
+
+    <script>
+        // Datos de ejemplo (puedes añadir todos tus países)
+        const energyData = [
+            {
+                country: "Africa",
+                Biomass: 164,
+                Solar: 0,
+                Wind: 0,
+                Hydro: 2601339
+            },
+            {
+                country: "Asia",
+                Biomass: 165,
+                Solar: 0,
+                Wind: 0,
+                Hydro: 29633196
+            }
+        ];
+
+        // Función para crear gráfica por país
+        function createBarChart(canvasId, data) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Biomass', 'Solar', 'Wind', 'Hydro'],
+                    datasets: [{
+                        label: `Generación de Energía - ${data.country}`,
+                        data: [data.Biomass, data.Solar, data.Wind, data.Hydro],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(153, 102, 255, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `Energía por tipo - ${data.country}`,
+                            font: {
+                                size: 18
+                            }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Crear gráficas individuales
+        energyData.forEach((countryData, index) => {
+            createBarChart(`graph${countryData.country}`, countryData);
+        });
+    </script>
+</body>
+</html>

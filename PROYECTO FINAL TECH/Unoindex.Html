@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto Final Tech</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Librería para gráficas (Chart.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h1>Proyecto Final Tech</h1>
+
+    <!-- CALCULADORA -->
+    <section class="card">
+        <h2>Calculadora</h2>
+        <input type="number" id="num1" placeholder="Número 1">
+        <input type="number" id="num2" placeholder="Número 2">
+        <button onclick="sumar()">Sumar</button>
+        <p id="resultado"></p>
+    </section>
+
+    <!-- GRÁFICA -->
+    <section class="card">
+        <h2>Gráfica de Ejemplo</h2>
+        <canvas id="miGrafica"></canvas>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
