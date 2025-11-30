@@ -3,6 +3,7 @@ const mobileToggle = document.getElementById('mobileToggle');
 const mobileMenu = document.getElementById('mobileMenu');
 const navLinks = Array.from(document.querySelectorAll('.nav-link'));
 
+
 // Toggle menú móvil 
 if (mobileToggle && mobileMenu) {
   function closeMobileMenu() {
@@ -55,22 +56,15 @@ navLinks.forEach(link => {
   });
 });
 
-// Resaltar enlace activo según scroll
-const sections = navLinks.map(a => document.getElementById(a.getAttribute('data-target')));
+// === Resaltar página actual por URL ===
+const currentPage = window.location.pathname.split('/').pop();
 
-function onScroll() {
-  const offset = window.scrollY + 110; // compensación por nav fijo
-  let currentIndex = sections.findIndex(sec => sec && (sec.offsetTop <= offset && (sec.offsetTop + sec.offsetHeight) > offset));
-  navLinks.forEach(l => l.classList.remove('active'));
-  if (currentIndex >= 0) {
-    navLinks[currentIndex].classList.add('active');
-  } else {
-    navLinks[0].classList.add('active');
+navLinks.forEach(link => {
+  const linkPage = link.getAttribute('href');
+  if (linkPage === currentPage) {
+    link.classList.add('active');
   }
-}
-
-window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('load', onScroll);
+});
 
 // Mejor manejo de accesibilidad: cerrar menú con ESC
 document.addEventListener('keydown', (e) => {
