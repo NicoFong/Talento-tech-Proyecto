@@ -131,7 +131,7 @@
       </section>
 
       <!-- grafica -->
-
+<!-- profe, si lo abre con live server le funciona las graficas lo que pasa es que como esta con usuando un chart desde link no  funciona si se abre local -->
 <section id="graficaAmerica" class="section" aria-labelledby="tituloGraficaAmerica">
   <h2 id="tituloGraficaAmerica" class="section-title">Consumo de Energía Renovable en América</h2>
 
@@ -148,6 +148,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+    
 // --- Función cargar CSV ---
 async function cargarCSV(url) {
     const response = await fetch(url);
@@ -190,10 +191,10 @@ cargarCSV("./datosUSA.csv").then(data => {
                 backgroundColor: "rgba(54, 162, 235, 0.7)"
             },
             {
-                label: "Hidroeléctrica (TWh)",
-                data: america2020.map(d => d["Hydro Generation - TWh"]),
-                backgroundColor: "rgba(153, 102, 255, 0.7)"
-            },
+             label: "Hidroeléctrica (TWh)",
+             data: america2020.map(d => d["Hydro Generation - TWh\r"]),
+            backgroundColor: "rgba(153, 102, 255, 0.7)"
+            },   
             {
                 label: "Biomasa/Otras (TWh)",
                 data: america2020.map(d => d["Geo Biomass Other - TWh"]),
@@ -209,6 +210,8 @@ cargarCSV("./datosUSA.csv").then(data => {
 
 });
 </script>
+
+
       <!-- CTA/Enlaces a otras secciones relevantes -->
       <nav aria-label="Navegación secundaria" style="margin-top:1rem;">
         <a class="btn" href="EnColombia.html">¿Energia solar en Colombia?</a>
