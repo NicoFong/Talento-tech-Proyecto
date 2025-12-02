@@ -114,12 +114,23 @@
       </div>
     </div>
 
+    <div class="card">
+      <h3>Tendencia de Producción (Solar vs Eólica)</h3>
+      <canvas id="lineChart"></canvas>
+    </div>
+
+
     <h3>Importancia de la energía solar en el país</h3>
     <p class="muted">
       La energía solar es un aliado fundamental para mejorar la confiabilidad del sistema eléctrico, reducir emisiones y promover la autonomía energética en regiones con baja cobertura. 
       Su aplicación ha permitido cerrar brechas de acceso en zonas rurales y avanzar hacia un modelo energético más limpio y competitivo.
     </p>
   </div>
+  <div class="card">
+    <h3>Evolución Energía Renovable vs Convencional</h3>
+    <canvas id="areaChart"></canvas>
+  </div>
+
 </section>
   </main>
 
@@ -141,5 +152,8 @@
 
   <!-- Vincula el JS -->
   <script src="funciones.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="funcionesGraficas.js"></script>
+
 </body>
 </html>
