@@ -100,19 +100,13 @@
           <li>Escalabilidad: desde instalaciones residenciales hasta parques solares a gran escala.</li>
         </ul>
       </div>
-        <div class="card">
-    <label for="country-select" class="muted">Selecciona un país:</label>
-    <select id="country-select"></select>
-        </div>
-        <div class="card">
-            <h3>Producción por Fuente</h3>
-            <canvas id="barChart"></canvas>
+     
         </div>
       <!-- Historia general compacta (SEO: subtítulos y buena estructura) -->
       <section aria-labelledby="historiaSolar" style="margin-top:1.5rem;">
         <h2 id="historiaSolar" class="section-title">Breve historia de la energía solar</h2>
 
-        <div class="card">
+        <div >
           <p class="muted">
             El desarrollo de la energía solar combina descubrimientos científicos y avances tecnológicos. El <em>efecto
             fotovoltaico</em> fue identificado en el siglo XIX y, desde mediados del siglo XX, se desarrollaron las primeras
@@ -120,12 +114,7 @@
             la tecnología fotovoltaica en una opción económicamente viable. En la última década, la integración de sistemas
             de almacenamiento y las políticas públicas han impulsado su adopción a gran escala.
           </p>
-          <div class="grid-2">
-              <div class="card"><p id="card-hidro" class="muted">Hidro: --</p></div>
-              <div class="card"><p id="card-eolica" class="muted">Eólica: --</p></div>
-              <div class="card"><p id="card-solar" class="muted">Solar: --</p></div>
-              <div class="card"><p id="card-biomasa" class="muted">Biomasa: --</p></div>
-          </div>
+       
           <h3 class="section-title" style="font-size:1rem; margin-top:1rem;">Hitos clave</h3>
           <ul class="muted">
             <li><strong>Siglo XIX – 1950:</strong> descubrimiento del efecto fotovoltaico y primeras investigaciones.</li>
@@ -140,12 +129,14 @@
             instituciones públicas y privadas.
           </p>
         </div>
+        <!-- grafica de barras  -->
+
+        <canvas id="chartAmerica"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="archivo.js"></script>
       </section>
 
-      <div class="card">
-          <h3>Distribución Porcentual</h3>
-         <canvas id="pieChart"></canvas>
-      </div>
+ 
 
 
 

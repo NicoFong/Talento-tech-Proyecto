@@ -79,15 +79,16 @@
       La adopción de la energía solar en Colombia ha evolucionado desde pequeños proyectos aislados en zonas rurales hasta convertirse en una pieza clave de la transición energética nacional. 
       En las últimas décadas, el país ha consolidado un marco legal y tecnológico que impulsa el desarrollo de energías renovables no convencionales, especialmente la energía fotovoltaica.
     </p>
+<!-- grafica de linea  -->
 
     <h3>Línea de tiempo del desarrollo solar en Colombia</h3>
-
+     <canvas id="chartLineasCO"></canvas>
     <div class="grid-2">
       <div class="card small">
         <h4>Antes del 2000</h4>
         <p class="muted">En zonas rurales apartadas se implementan sistemas solares aislados para iluminación, telecomunicaciones y bombeo de agua. La energía solar era usada principalmente en proyectos comunitarios de baja escala.</p>
       </div>
-
+      
       <div class="card small">
         <h4>2000 – 2010</h4>
         <p class="muted">Los programas del IPSE fortalecen la electrificación rural mediante sistemas fotovoltaicos individuales. Se incrementa el uso solar en instituciones educativas y puestos de salud remotos.</p>
@@ -114,11 +115,6 @@
       </div>
     </div>
 
-    <div class="card">
-      <h3>Tendencia de Producción (Solar vs Eólica)</h3>
-      <canvas id="lineChart"></canvas>
-    </div>
-
 
     <h3>Importancia de la energía solar en el país</h3>
     <p class="muted">
@@ -126,10 +122,21 @@
       Su aplicación ha permitido cerrar brechas de acceso en zonas rurales y avanzar hacia un modelo energético más limpio y competitivo.
     </p>
   </div>
-  <div class="card">
-    <h3>Evolución Energía Renovable vs Convencional</h3>
-    <canvas id="areaChart"></canvas>
-  </div>
+<!-- grafica de torta -->
+ <br>
+<div style="
+    width:500px;
+    height:400px;
+    margin: 0 auto;       
+">
+    <canvas id="chartTortaCO"></canvas>
+</div>
+    <canvas id="chartTortaCO"></canvas>
+</div>
+   
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="archivo.js"></script>
+
 
 </section>
   </main>

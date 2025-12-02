@@ -369,3 +369,7 @@ header, nav, main, footer {
     gap: 1.5rem;
   }
 }
+.contenedor-torta {
+    width: 260px;
+    height: 260px;
+}
