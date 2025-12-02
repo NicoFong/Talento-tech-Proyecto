@@ -1,0 +1,6 @@
+{
+  "type": "commonjs",
+  "dependencies": {
+    "papaparse": "^5.4.1"
+  }
+}

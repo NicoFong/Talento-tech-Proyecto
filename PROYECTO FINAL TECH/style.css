@@ -1,0 +1,34 @@
+/* --- REGIONES CRÍTICAS PARA EL TAMAÑO DE GRÁFICOS --- */
+
+/* 1. Define el ancho de la sección contenedora para que no ocupe el 100% de la pantalla */
+.dashboard {
+    /* Mantiene los elementos centrados y les da un margen */
+    max-width: 1200px; 
+    margin: 20px auto; 
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se muevan a la siguiente línea */
+    gap: 20px; /* Espacio entre las secciones */
+}
+
+/* 2. Regla clave: Limita el ancho de cada caja de gráfico */
+.chart-box {
+    /* Ocupa el 100% del ancho si la pantalla es pequeña, pero se limita a 600px en pantallas grandes */
+    width: 100%;
+    max-width: 600px; /* Este valor asegura que el gráfico no sea gigante */
+    /* Añade margen para que no se peguen */
+    margin: 0 auto; 
+    background-color: #222; /* El fondo oscuro de tu dashboard */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. Estilo para el contenedor de las tarjetas (opcional, pero mejora el diseño) */
+.cards-container {
+    width: 100%; /* Las tarjetas sí pueden ocupar todo el ancho */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}

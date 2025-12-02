@@ -1,102 +1,78 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
+import os
 
-# Configuración: Estilo visual y filtros de análisis
-sns.set_style("whitegrid")
-PAISES_A_INCLUIR = ["Spain", "Portugal", "Germany", "United States"] # Países a graficar
-AÑO_INICIO = 2010 # Año inicial para la visualización
-NOMBRE_ARCHIVO_GRAFICO = 'grafico_energia.png' # Nombre del archivo de imagen de salida
+# --- 1. Cargar archivo ---
+# Nombre exacto de tu archivo XLSX
+file_path = "Dato_Sucio.cvs.xlsx" 
 
-# Nombre del archivo CSV
-file_path = "Copia de 02_modern-renewable-energy-consumption.xlsx - Copia de 02_modern-renewable-en.csv"
-
-# --- 1. Cargar y Limpiar Datos (¡AJUSTE CRÍTICO!) ---
+# Usamos pd.read_excel para leer el archivo .xlsx
 try:
-    # on_bad_lines='skip' ignora líneas con formato incorrecto, resolviendo el error de carga
-    df = pd.read_csv(file_path, encoding='latin-1', on_bad_lines='skip', low_memory=False)
-    
-    if df.empty:
-        print("\nERROR: El archivo CSV se cargó, pero no contiene filas válidas.")
-        exit()
-        
-    print(f"Archivo cargado exitosamente. Total de filas válidas: {len(df)}")
+    df = pd.read_excel(file_path)
 except Exception as e:
-    print(f"ERROR: No se pudo cargar el archivo CSV. Revisa el nombre o la estructura: {e}")
+    print(f"Error al cargar el archivo: {e}. Asegúrate que el archivo esté en la carpeta del proyecto y sea un archivo XLSX.")
     exit()
 
-# --- 2. Preparación de Datos ---
+print("Archivo cargado correctamente.")
+print("Columnas encontradas:", df.columns.tolist())
 
-# 2.1 Renombrar y Estandarizar Columnas
-column_mapping = {
-    'Geo Biomass Other - TWh': 'Biomass_TWh',
-    'Solar Generation - TWh': 'Solar_TWh',
-    'Wind Generation - TWh': 'Wind_TWh',
-    'Hydro Generation - TWh': 'Hydro_TWh'
-}
-df = df.rename(columns=column_mapping)
-generation_columns = list(column_mapping.values())
+# --- 2. Renombrar columnas a nombres más fáciles ---
+df = df.rename(columns={
+    "Geo Biomass Other - TWh": "biomasa",
+    "Solar Generation - TWh": "solar",
+    "Wind Generation - TWh": "viento",
+    "Hydro Generation - TWh": "hidro"
+})
 
-# 2.2 Conversión de Tipos (Manejo de Valores No Numéricos)
-# El código utiliza errors='coerce' y fillna(0) para convertir datos sucios (como fechas o texto) a 0.0
-df['Year'] = pd.to_numeric(df['Year'], errors='coerce').fillna(0).astype(int)
+# --- 3. Conversión de datos (Soluciona los errores de fechas y texto) ---
+# 3.1. Convertir 'Year' a números
+df['Year'] = pd.to_numeric(df['Year'], errors='coerce').astype('Int64')
 
-for col in generation_columns:
-    df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0.0)
-    
-# 2.3 Aplicar Filtros (Países y Años)
-df_filtrado = df[
-    (df['Entity'].isin(PAISES_A_INCLUIR)) & 
-    (df['Year'] >= AÑO_INICIO) &
-    (df['Year'] != 0) 
-].copy()
+# 3.2. Convertir columnas de energía a números (Soluciona el TypeError)
+columnas_energia = ['biomasa', 'solar', 'viento', 'hidro']
+for col in columnas_energia:
+    # Fuerza a que cualquier cosa que no sea número sea NaN
+    df[col] = pd.to_numeric(df[col], errors='coerce') 
 
-if df_filtrado.empty:
-    print("\nAVISO: No se encontraron datos para los países y año seleccionados. Revisa los filtros.")
-    exit()
+# Elimina las filas donde los datos clave son NaN (Datos Limpios)
+df = df.dropna(subset=['Year'] + columnas_energia) 
+print("Columnas 'Year' y energía convertidas a número.")
 
-# 2.4 Reestructurar los datos para facilitar la graficación
-df_long = pd.melt(
-    df_filtrado,
-    id_vars=['Entity', 'Year'],
-    value_vars=generation_columns,
-    var_name='Tipo_Energia',
-    value_name='Generacion_TWh'
-)
+# --- 4. Crear carpeta para guardar imágenes ---
+carpeta = "graficas"
+if not os.path.exists(carpeta):
+    os.makedirs(carpeta)
+    print(f"Carpeta '{carpeta}' creada.")
+else:
+    print(f"Carpeta '{carpeta}' ya existe.")
 
-# Crear una columna combinada para el eje X (País - Año)
-df_long['Pais_Año'] = df_long['Entity'] + ' (' + df_long['Year'].astype(str) + ')'
+# --- 5. Seleccionar países únicos ---
+paises = df["Entity"].unique()
+print("\nPaíses encontrados:", paises)
 
+# --- 6. Graficar y guardar por país ---
+for pais in paises:
+    data_pais = df[df["Entity"] == pais]
 
-# --- 3. Generar las Gráficas de Barras ---
+    # LÍNEA MODIFICADA: Reducir el tamaño de la figura para que no se vea tan grande en la web
+    plt.figure(figsize=(9, 5)) 
 
-print(f"\nGenerando gráfica de barras para los países: {PAISES_A_INCLUIR} desde el año {AÑO_INICIO}...")
+    plt.plot(data_pais["Year"], data_pais["biomasa"], label="Biomasa")
+    plt.plot(data_pais["Year"], data_pais["solar"], label="Solar")
+    plt.plot(data_pais["Year"], data_pais["viento"], label="Viento")
+    plt.plot(data_pais["Year"], data_pais["hidro"], label="Hidro")
 
-plt.figure(figsize=(16, 8))
-sns.barplot(
-    data=df_long,
-    x='Pais_Año', 
-    y='Generacion_TWh', 
-    hue='Tipo_Energia', 
-    palette='Spectral'
-)
+    plt.title(f"Energía renovable en {pais}")
+    plt.xlabel("Año")
+    plt.ylabel("TWh")
+    plt.legend()
+    plt.grid(True)
 
-# Configuración de los títulos y etiquetas
-plt.title(
-    f'Generación de Energía Renovable (TWh) por País y Año (Desde {AÑO_INICIO})',
-    fontsize=16, 
-    fontweight='bold'
-)
-plt.xlabel('País y Año', fontsize=12)
-plt.ylabel('Generación (TWh)', fontsize=12)
-plt.xticks(rotation=45, ha='right') 
-plt.legend(title='Indicador', bbox_to_anchor=(1.01, 1), loc='upper left')
-plt.tight_layout()
+    # --- Guardar imagen PNG ---
+    nombre_archivo = f"{carpeta}/{pais.replace('/', '-').replace(':', '-')}.png"
+    plt.savefig(nombre_archivo, dpi=300, bbox_inches='tight')
+    plt.close()
 
-# ➡️ LÍNEA CLAVE: Guarda el gráfico como imagen para la web
-plt.savefig(NOMBRE_ARCHIVO_GRAFICO) 
-plt.close()
+    print(f"Gráfica guardada: {nombre_archivo}")
 
-print(f"\n✅ ¡Gráfico guardado exitosamente! El archivo '{NOMBRE_ARCHIVO}VC<
- 
+print("\nTodas las gráficas fueron generadas y guardadas correctamente.")

@@ -3,96 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gráficas de Energía</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Calculadora y Datos Históricos</title>
+    <link rel="stylesheet" href="style.css">
+    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
+        .data-table-container { 
+            margin-top: 40px; 
+            overflow-x: auto; /* Permite desplazamiento horizontal */
+            max-height: 400px; /* Limita la altura de la tabla */
+            border-radius: 8px;
+            background-color: #2d2d30;
         }
-        canvas {
-            margin-bottom: 50px;
+        #dataTable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8em;
+        }
+        #dataTable th, #dataTable td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #3b3b3b;
+        }
+        #dataTable th {
+            background-color: #007acc;
+            color: white;
+            position: sticky; /* Fija el encabezado al hacer scroll */
+            top: 0;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
-    <h1>Gráficas de Energía por País</h1>
+    <header>
+        <h1>Calculadora de Impacto y Datos Históricos</h1>
+        <nav>
+            <a href="index.html">Inicio (Solar)</a>
+            <a href="energia.html">Calculadora</a>
+            <a href="grafica.html">Dashboard</a>
+        </nav>
+    </header>
 
-    <!-- Canvas para cada país -->
-    <canvas id="graphAfrica"></canvas>
-    <canvas id="graphAsia"></canvas>
+    <main>
+        <section class="content-box calculator-section">
+            <h2>Nivel 2: Calculadora de Potencial y Consumo</h2>
+            <p>Introduce tu consumo eléctrico anual (TWh) para estimar tu impacto en el contexto de la generación renovable global total.</p>
+            
+            <form id="calculator-form" class="calculator-form">
+                <label for="user-input">Consumo Anual (TWh):</label>
+                <input type="number" id="user-input" placeholder="Ej: 0.000005 (Consumo promedio)" step="any" required>
+                <button type="submit">Calcular Impacto</button>
+            </form>
+            
+            <div id="total-generation-display" class="message-display">Cargando datos de generación total...</div>
+            <div id="calculation-result" class="message-display"></div>
+        </section>
 
-    <script>
-        // Datos de ejemplo (puedes añadir todos tus países)
-        const energyData = [
-            {
-                country: "Africa",
-                Biomass: 164,
-                Solar: 0,
-                Wind: 0,
-                Hydro: 2601339
-            },
-            {
-                country: "Asia",
-                Biomass: 165,
-                Solar: 0,
-                Wind: 0,
-                Hydro: 29633196
-            }
-        ];
+        <section class="content-box data-section">
+            <h2>Nivel 2: Visualización Tabular de Datos Históricos (Muestra Global)</h2>
+            <div class="data-table-container">
+                <table id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Entidad</th>
+                            <th>Año</th>
+                            <th>Biomasa (TWh)</th>
+                            <th>Solar (TWh)</th>
+                            <th>Eólica (TWh)</th>
+                            <th>Hidro (TWh)</th>
+                            <th>Total (TWh)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
 
-        // Función para crear gráfica por país
-        function createBarChart(canvasId, data) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Biomass', 'Solar', 'Wind', 'Hydro'],
-                    datasets: [{
-                        label: `Generación de Energía - ${data.country}`,
-                        data: [data.Biomass, data.Solar, data.Wind, data.Hydro],
-                        backgroundColor: [
-                            'rgba(75, 192, 192, 0.6)',
-                            'rgba(255, 206, 86, 0.6)',
-                            'rgba(54, 162, 235, 0.6)',
-                            'rgba(153, 102, 255, 0.6)'
-                        ],
-                        borderColor: [
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(153, 102, 255, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: `Energía por tipo - ${data.country}`,
-                            font: {
-                                size: 18
-                            }
-                        },
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
+    <footer>
+        <p>&copy; Proyecto Final Tech - Transición Energética</p>
+    </footer>
 
-        // Crear gráficas individuales
-        energyData.forEach((countryData, index) => {
-            createBarChart(`graph${countryData.country}`, countryData);
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <script src="archivo.js"></script>
 </body>
 </html>

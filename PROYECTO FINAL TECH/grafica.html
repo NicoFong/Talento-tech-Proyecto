@@ -3,77 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gráfica Energía Renovable</title>
-    <!-- Chart.js -->
+    <title>Dashboard Energías Renovables</title>
+
+    <link rel="stylesheet" href="style.css"> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<h2>Consumo de Energía Renovable - USA</h2>
-<canvas id="chartUSA" width="800" height="400"></canvas>
+<header>
+    <h1>Dashboard Energía Renovable</h1>
+</header>
 
-<script>
-// Datos de ejemplo (usa tus datos formateados desde Python)
-const dataUSA = [
-    {Year: 2010, Biomass: 10.2, Solar: 2.5, Wind: 4.1, Hydro: 20.3},
-    {Year: 2011, Biomass: 11.0, Solar: 3.0, Wind: 4.5, Hydro: 19.8},
-    {Year: 2012, Biomass: 11.5, Solar: 3.5, Wind: 5.0, Hydro: 21.0},
-    // agrega todos los años de tu CSV
-];
+<main class="dashboard">
 
-// Extraer los labels (años) y los datasets
-const labels = dataUSA.map(d => d.Year);
+    <section class="selector-box">
+        <label for="country-select">Selecciona un país:</label>
+        <select id="country-select"></select>
+    </section>
 
-const data = {
-    labels: labels,
-    datasets: [
-        {
-            label: 'Biomass TWh',
-            data: dataUSA.map(d => d.Biomass),
-            backgroundColor: 'rgba(75, 192, 192, 0.7)'
-        },
-        {
-            label: 'Solar TWh',
-            data: dataUSA.map(d => d.Solar),
-            backgroundColor: 'rgba(255, 206, 86, 0.7)'
-        },
-        {
-            label: 'Wind TWh',
-            data: dataUSA.map(d => d.Wind),
-            backgroundColor: 'rgba(54, 162, 235, 0.7)'
-        },
-        {
-            label: 'Hydro TWh',
-            data: dataUSA.map(d => d.Hydro),
-            backgroundColor: 'rgba(153, 102, 255, 0.7)'
-        }
-    ]
-};
+    <section class="cards-container">
+        <div id="card-hidro" class="card card-draft">Hidro: 0.00 TWh</div>
+        <div id="card-eolica" class="card card-progress">Eólica: 0.00 TWh</div>
+        <div id="card-solar" class="card card-editing">Solar: 0.00 TWh</div>
+        <div id="card-biomasa" class="card card-done">Biomasa: 0.00 TWh</div>
+    </section>
 
-const config = {
-    type: 'bar',
-    data: data,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: { position: 'top' },
-            title: { display: true, text: 'Consumo de Energía Renovable USA (TWh)' }
-        },
-        scales: {
-            y: { beginAtZero: true }
-        }
-    },
-};
+    <section class="chart-box static-image-container">
+        <h3>Gráfico de Tendencia Anual (Generado por Python)</h3>
+        <img id="python-chart-img" src="" alt="Gráfico de generación por país" style="max-width: 100%; height: auto;">
+    </section>
+    
+    <section class="chart-box">
+        <h3>Tendencia Anual de Generación (Interactivo)</h3>
+        <canvas id="lineChart"></canvas>
+    </section>
 
-// Crear la gráfica
-const myChart = new Chart(
-    document.getElementById('chartUSA'),
-    config
-);
-</script>
+    <section class="chart-box">
+        <h3>Producción Acumulada por Fuente (Interactivo)</h3>
+        <canvas id="barChart"></canvas>
+    </section>
+
+    <section class="chart-box">
+        <h3>Distribución Total (Interactivo)</h3>
+        <canvas id="pieChart"></canvas>
+    </section>
+
+    <section class="chart-box">
+        <h3>Consumo fósil vs renovable (Interactivo)</h3>
+        <canvas id="areaChart"></canvas>
+    </section>
+
+    <section class="chart-box calculator-box">
+        <h3>💰 Calculadora de Inversión Renovable</h3>
+        <label for="inversion-monto">Monto a Invertir (USD):</label>
+        <input type="number" id="inversion-monto" value="1000000" min="1000">
+        
+        <label for="select-fuente">Selecciona la fuente:</label>
+        <select id="select-fuente">
+            <option value="eolica">Eólica</option>
+            <option value="solar">Solar</option>
+            <option value="hidro">Hidro</option>
+            <option value="biomasa">Biomasa</option>
+        </select>
+        
+        <button id="calcular-btn">Calcular Potencial</button>
+        
+        <div id="resultado-calculadora">
+            <h4>Resultados:</h4>
+            <p id="potencial-generacion">Potencial de Generación (TWh): **0.00**</p>
+            <p id="participacion-estimada">Participación Estimada en el Total (%): **0.00%**</p>
+        </div>
+    </section>
+    </main>
+
+<script src="archivo.js"></script>
 
 </body>
 </html>
-
-
-
