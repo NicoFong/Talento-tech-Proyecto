@@ -136,8 +136,32 @@
       que reducen costos para instituciones y empresas, facilitando la adopción de sistemas solares.
     </p>
   </div>
-  
+
+  <!-- calculadora -->
+<section class="card">
+        <h3> Calculadora de Inversión Renovable</h3>
+        <label  class="muted" for="inversion-monto">Monto a Invertir (USD):</label>
+        <input type="number" id="inversion-monto"  min="1000">
+        <br>
+        <label  class="muted" for="select-fuente">Selecciona la fuente:</label> 
+        <select  id="select-fuente">
+            <option value="eolica">Eólica</option>
+            <option value="solar">Solar</option>
+            <option value="hidro">Hidro</option>
+            <option value="biomasa">Biomasa</option>
+        </select>
+       <br>
+        <button id="calcular-btn">Calcular Potencial</button>
+        
+        <div class="card small" id="resultado-calculadora">
+            <h4>Resultados:</h4>
+            <p id="potencial-generacion">Potencial de Generación (TWh): **0.00**</p>
+            <p id="participacion-estimada">Participación Estimada en el Total (%): **0.00%**</p>
+        </div>
+    </section>
 </section>
+
+
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-grid">
